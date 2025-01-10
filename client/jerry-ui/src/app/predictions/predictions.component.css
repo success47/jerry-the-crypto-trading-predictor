@@ -1,0 +1,114 @@
+/* Fullscreen container with dynamic gradient background */
+.fullscreen-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: background-color 0.5s ease, background-image 0.5s ease;
+}
+
+.fullscreen-container.buy {
+  background: linear-gradient(135deg, #000000, #012e03); /* Green gradient for Buy */
+}
+
+.fullscreen-container.hold {
+  background: linear-gradient(135deg, #000000, #1a1919); /* Gray gradient for Hold */
+}
+
+.fullscreen-container.sell {
+  background: linear-gradient(135deg, #000000, #530202); /* Red gradient for Sell */
+}
+/* Frosted glass effect for the card */
+.prediction-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  border-radius: 15px;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  width: 90%;
+  max-width: 600px;
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  background: rgba(255, 255, 255, 0.2); /* Transparent white for the glass effect */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease;
+}
+
+/* Centered content */
+.prediction-content {
+  text-align: center;
+  flex: 1;
+}
+
+.prediction-content h2 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.prediction-content .price {
+  font-size: 48px;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+.prediction-content .action {
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.prediction-content .last-update {
+  font-size: 14px;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Settings button */
+.settings-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute; /* Position it absolutely */
+  top: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  color: white; /* Ensure the icon is visible */
+}
+
+.settings-icon {
+  width: 24px;
+  height: 24px;
+  background-image: url('/client/jerry-ui/src/favicon.ico'); /* Replace with your icon path */
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* animations*/
+.fullscreen-container.buy {
+  background: linear-gradient(135deg, #000000, #012e03);
+  animation: gradientAnimation 3s infinite alternate;
+}
+
+.fullscreen-container.hold {
+  background: linear-gradient(135deg, #000000, #1a1919);
+  animation: gradientAnimation 3s infinite alternate;
+}
+
+.fullscreen-container.sell {
+  background: linear-gradient(135deg, #000000, #530202);
+  animation: gradientAnimation 3s infinite alternate;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}

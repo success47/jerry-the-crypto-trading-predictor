@@ -67,6 +67,7 @@ app.get('/api/history', async (req, res) => {
 // Endpoint to get prediction
 app.get('/api/prediction', async (req, res) => {
     data = await fetchClosingPriceData();
+    runStrategies();
     let prediction = new Prediction(signalHistory.signals, data);
     predictionResult = await prediction.getPrediction();
     if (predictionResult) {

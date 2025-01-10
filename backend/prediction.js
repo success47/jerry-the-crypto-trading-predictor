@@ -20,13 +20,15 @@ class Prediction {
   
     // Helper method to determine history trend
     analyzeHistory() {
-      const smaSignals = this.history.filter(signal => signal.strategy === 'SMA');
-      const emaSignals = this.history.filter(signal => signal.strategy === 'EMA');
-      const rsiSignals = this.history.filter(signal => signal.strategy === 'RSI');
-
+      const recentHistory = this.history.slice(-5); // Get the last five entries
+    
+      const smaSignals = recentHistory.filter(signal => signal.strategy === 'SMA');
+      const emaSignals = recentHistory.filter(signal => signal.strategy === 'EMA');
+      const rsiSignals = recentHistory.filter(signal => signal.strategy === 'RSI');
+    
       const buySignals = [...smaSignals, ...emaSignals, ...rsiSignals].filter(signal => signal.signal === 'buy').length;
       const sellSignals = [...smaSignals, ...emaSignals, ...rsiSignals].filter(signal => signal.signal === 'sell').length;
-
+    
       if (buySignals > sellSignals) return 'up';
       if (sellSignals > buySignals) return 'down';
       return 'consolidating';

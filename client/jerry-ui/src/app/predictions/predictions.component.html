@@ -1,10 +1,13 @@
-<div class="fullscreen-container" [ngClass]="{
-  'buy': currentPrediction?.prediction === 'Buy',
-   'hold': currentPrediction?.prediction === 'Hold',
-    'sell': currentPrediction?.prediction === 'Sell'}">
+<div
+  class="fullscreen-container"
+  [ngClass]="{
+    buy: currentPrediction?.prediction === 'Buy',
+    hold: currentPrediction?.prediction === 'Hold',
+    sell: currentPrediction?.prediction === 'Sell'
+  }"
+>
   <div class="prediction-card">
     <div class="prediction-content">
-      <!--<h2>{{ currentPrediction?.pair }}</h2>-->
       <h2>BTC/USD</h2>
       <p class="price">${{ currentPrediction?.currentPrice }}</p>
       <p class="action">{{ currentPrediction?.prediction }}</p>
@@ -13,5 +16,13 @@
     <button class="settings-button">
       <mat-icon>settings</mat-icon>
     </button>
+
+    <!-- Checkbox in the bottom-left corner -->
+    <div class="history-checkbox-container">
+      <mat-checkbox [(ngModel)]="showHistory">History</mat-checkbox>
+    </div>
   </div>
+
+  <!-- History Component -->
+  <app-prediction-history *ngIf="showHistory"></app-prediction-history>
 </div>

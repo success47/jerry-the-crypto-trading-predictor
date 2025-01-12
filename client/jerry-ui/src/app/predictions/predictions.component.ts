@@ -7,6 +7,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { PredictionHistoryComponent } from '../prediction-history/prediction-history.component';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-predictions',
@@ -15,7 +18,10 @@ import { Subscription } from 'rxjs';
     MatCardModule,
     MatListModule,
     MatIconModule,
-    CommonModule 
+    CommonModule,
+    PredictionHistoryComponent,
+    FormsModule,
+    MatCheckboxModule 
   ],
   templateUrl: './predictions.component.html',
   styleUrl: './predictions.component.css'
@@ -26,6 +32,7 @@ export class PredictionsComponent implements OnInit, OnDestroy {
   predictionHistory: PredictionHistory[] = [];
   private intervalId: any;
   private subscription: Subscription = new Subscription();
+  showHistory = false;
 
   constructor(private predictionService: PredictionService) {}
 

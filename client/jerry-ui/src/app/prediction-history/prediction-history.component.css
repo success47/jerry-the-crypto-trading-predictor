@@ -1,0 +1,44 @@
+.history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100vw;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+  }
+  
+  .history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background: #1e1e1e;
+    border-radius: 5px;
+  }
+  
+  .history-item span {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .history-item .buy {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .history-item .sell {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .view-all {
+    text-align: right;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  

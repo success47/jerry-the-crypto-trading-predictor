@@ -1,6 +1,7 @@
 /* Fullscreen container with dynamic gradient background */
 .fullscreen-container {
   display: flex;
+  flex-direction: column; /* Stack items vertically */
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -38,6 +39,7 @@
   background: rgba(255, 255, 255, 0.2); /* Transparent white for the glass effect */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   transition: background-color 0.3s ease;
+  position: relative; /* Position it relatively */
 }
 
 /* Centered content */
@@ -86,6 +88,28 @@
   background-image: url('/client/jerry-ui/src/favicon.ico'); /* Replace with your icon path */
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+/* Styling for the checkbox */
+.history-checkbox-container {
+  position: absolute; /* Position inside the prediction card */
+  bottom: 10px; /* Adjust distance from the bottom */
+  left: 10px; /* Adjust distance from the left */
+  display: flex;
+  align-items: center;
+}
+
+.mat-checkbox {
+  color: rgba(255, 255, 255, 0.8); /* Checkbox color */
+}
+
+.mat-checkbox .mat-checkbox-background {
+  border-color: rgba(255, 255, 255, 0.8); /* Border color for unchecked */
+}
+
+.mat-checkbox-checked.mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-checkbox-background {
+  background-color: white; /* Checked color */
 }
 
 /* animations*/

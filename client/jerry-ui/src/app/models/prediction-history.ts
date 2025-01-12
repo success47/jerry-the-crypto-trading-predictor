@@ -1,7 +1,13 @@
 export interface PredictionHistory {
+    tradingPair: string;
+    stragetgy: string;
     prediction: string;
-    signalTime: string;
-    currentPrice: number;
+    predictionTime: string;
+    status: string;
+    openPrice: number;
+    closePrice: number;
+    profit: number;
+    tradeTime: string;
 }
 
 

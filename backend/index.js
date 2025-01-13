@@ -66,19 +66,31 @@ app.get('/api/history', async (req, res) => {
 
 // Endpoint to get prediction
 app.get('/api/prediction', async (req, res) => {
-    data = await fetchClosingPriceData();
-    runStrategies();
-    let prediction = new Prediction(signalHistory.signals, data);
-    predictionResult = await prediction.getPrediction();
-    if (predictionResult) {
-        predictionHistory.addPredictions([predictionResult]);
-    }
-    res.json(predictionResult);
+  data = await fetchClosingPriceData();
+  runStrategies();
+  let prediction = new Prediction(signalHistory.signals, data);
+  predictionResult = await prediction.getPrediction();
+  if (predictionResult) {
+      // close predictions when hold is received
+      if (predictionResult.prediction == 'Hold') {
+          predictionHistory.closePredictions();
+      }
+
+      // Check if the new prediction is different from the last one
+      const lastPrediction = predictionHistory.predictions[predictionHistory.predictions.length - 1];
+      if (!lastPrediction || lastPrediction.prediction !== predictionResult.prediction) {
+          predictionHistory.addPredictions([predictionResult]);
+      }
+  }
+  res.json(predictionResult);
 });
 
 // Endpoint to get prediction history
 app.get('/api/prediction-history', async (req, res) => {
   try {
+    const data = await fetchClosingPriceData();
+    const latestPrice = data[data.length - 1];
+    predictionHistory.updateOpenPredictions(latestPrice)
     const predictions = await predictionHistory.getPredictions();
     res.json(predictions);
   } catch (error) {

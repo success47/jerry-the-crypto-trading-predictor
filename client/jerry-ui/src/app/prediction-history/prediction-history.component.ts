@@ -15,6 +15,8 @@ export class PredictionHistoryComponent implements OnInit, OnDestroy {
   @Input() historyList: PredictionHistory[] = [];
   private intervalId: any;
   private subscription: Subscription = new Subscription();
+  fullHistoryList: PredictionHistory[] = [];
+  showAll: boolean = false;
 
   constructor(private predictionService: PredictionService) {}
 
@@ -34,20 +36,17 @@ export class PredictionHistoryComponent implements OnInit, OnDestroy {
 
   fetchPredictionHistory(): void {
     this.subscription.add(
-      this.predictionService.getPredictionHistory().subscribe(history => {
-        this.historyList = history
-          .filter(item => item.prediction !== 'Hold')
-          .slice(0, 5)
-          .map(item => ({
-            ...item,
-            change: this.calculateChange(item.openPrice, item.currentPrice)
-          }));
-      })
+        this.predictionService.getPredictionHistory().subscribe(history => {
+            this.fullHistoryList = history
+                .sort((a, b) => new Date(b.predictionTime).getTime() - new Date(a.predictionTime).getTime()) // Sort by predictionTime from most recent to oldest
+                // Exclude 'hold' predictions
+            this.historyList = this.fullHistoryList.slice(0, 5); // Show only the top five entries initially
+        })
     );
   }
-
-  calculateChange(openPrice: number, currentPrice: number): string {
-    const change = ((currentPrice - openPrice) / openPrice) * 100;
-    return `${change.toFixed(2)}%`;
+  toggleViewAll(): void {
+    this.showAll = !this.showAll;
+    this.historyList = this.showAll ? this.fullHistoryList : this.fullHistoryList.slice(0, 5);
   }
+
 }

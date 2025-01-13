@@ -12,6 +12,7 @@ class PredictionHistory {
         }
         this.removeLastPrediction(); // Remove last prediction when limit is reached
         this.predictions.push(...newPredictions);
+        this.updateOpenPredictions(newPredictions[0].openPrice);
     }
 
     // Get the history of predictions
@@ -25,6 +26,29 @@ class PredictionHistory {
             this.predictions.shift();
         }
     }
+
+    // set statuses of predictions to closed
+    closePredictions(currentPrice) {
+        this.predictions.forEach(prediction => {
+            if (prediction.status === 'Open') {
+                prediction.status = 'Closed';
+                prediction.closePrice = currentPrice;
+            }
+        });
+    }
+
+    // update open prediction history items
+    updateOpenPredictions(currentPrice) {
+        this.predictions.forEach(prediction => {
+            if (prediction.status === 'Open') {
+                prediction.currentPrice = currentPrice;
+                prediction.change = ((currentPrice - prediction.openPrice) / prediction.openPrice * 100).toFixed(2) + '%';
+                prediction.profit = (currentPrice - prediction.openPrice).toFixed(2);
+            }
+        });
+    }
+    
+
 }
 
 module.exports = PredictionHistory;

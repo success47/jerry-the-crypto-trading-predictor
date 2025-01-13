@@ -1,5 +1,5 @@
 export interface Prediction {
     prediction: string;
-    signalTime: string;
+    predictionTime: string;
     currentPrice: number;
 }

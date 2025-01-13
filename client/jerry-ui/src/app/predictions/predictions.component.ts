@@ -40,7 +40,7 @@ export class PredictionsComponent implements OnInit, OnDestroy {
     this.fetchLatestPrediction();
     this.intervalId = setInterval(() => {
       this.fetchLatestPrediction();
-    }, 5000);
+    }, 1000);
   }
 
   ngOnDestroy(): void {

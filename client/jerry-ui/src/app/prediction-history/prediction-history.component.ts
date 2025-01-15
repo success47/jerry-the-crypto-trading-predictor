@@ -38,15 +38,14 @@ export class PredictionHistoryComponent implements OnInit, OnDestroy {
     this.subscription.add(
         this.predictionService.getPredictionHistory().subscribe(history => {
             this.fullHistoryList = history
-                .sort((a, b) => new Date(b.predictionTime).getTime() - new Date(a.predictionTime).getTime()) // Sort by predictionTime from most recent to oldest
-                // Exclude 'hold' predictions
-            this.historyList = this.fullHistoryList.slice(0, 5); // Show only the top five entries initially
+                .sort((a, b) => new Date(b.predictionTime).getTime() - new Date(a.predictionTime).getTime()); // Sort by predictionTime from most recent to oldest
+            this.historyList = this.showAll ? this.fullHistoryList : this.fullHistoryList.slice(0, 5); // Respect the showAll state
         })
     );
   }
+
   toggleViewAll(): void {
     this.showAll = !this.showAll;
     this.historyList = this.showAll ? this.fullHistoryList : this.fullHistoryList.slice(0, 5);
   }
-
 }

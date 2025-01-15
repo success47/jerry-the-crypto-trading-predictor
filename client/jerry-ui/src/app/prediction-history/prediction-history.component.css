@@ -10,6 +10,18 @@
     margin-top: 20px;
     font-family: 'Roboto', sans-serif;
     color: white;
+    max-height: 400px; /* Set the desired max height */
+  }
+  .history-content {
+    flex: 1;
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 12px; /* Add space for the scrollbar */
+  }
+  
+  .view-all {
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
   }
   
   .history-item {
@@ -18,6 +30,7 @@
     padding: 10px;
     background: #1e1e1e;
     border-radius: 5px;
+    margin-bottom: 10px;
   }
   
   .history-item span {
@@ -42,3 +55,21 @@
     font-size: 14px;
   }
   
+  /* Custom scrollbar styles */
+.history-content::-webkit-scrollbar {
+  width: 12px;
+}
+
+.history-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5); /* Match the background of the history container */
+  border-radius: 10px;
+}
+
+.history-content::-webkit-scrollbar-thumb {
+  background: #888; /* Customize the scrollbar thumb color */
+  border-radius: 10px;
+}
+
+.history-content::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Customize the scrollbar thumb hover color */
+}

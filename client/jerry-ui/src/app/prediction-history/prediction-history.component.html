@@ -1,4 +1,5 @@
 <div class="history-container">
+  <div class="history-content">
     <div *ngFor="let history of historyList" class="history-item">
       <span [ngClass]="{ 'buy': history.prediction === 'Buy', 'sell': history.prediction === 'Sell' }">{{ history.prediction }}</span>
       <span>{{ history.predictionTime | date: 'EEE HH:mm' }}</span>
@@ -6,8 +7,8 @@
       <span>{{ history.change }}</span>
       <span>{{ history.status }}</span>
     </div>
-    <a class="view-all" (click)="toggleViewAll()">
-      {{ showAll ? 'Show less' : 'View all' }}
-    </a>
   </div>
-  
+  <a class="view-all" (click)="toggleViewAll()">
+    {{ showAll ? 'Show less' : 'View all' }}
+  </a>
+</div>
